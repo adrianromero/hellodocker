@@ -1,0 +1,42 @@
+version: "3"
+services:
+  counter:
+    image: adrianrc/counterservice
+    deploy:
+      replicas: 3
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: 50M
+      restart_policy:
+        condition: on-failure
+    environment:
+      - DB_DRIVER=org.postgresql.Driver
+      - DB_URL=jdbc:postgresql://database:5432/postgres
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=mysecret
+    ports:
+      - "4567:4567"
+    networks:
+      - webnet
+  database:
+    image: adrianrc/counterdatabase
+    environment:
+      - POSTGRES_PASSWORD=mysecret
+    networks:
+      - webnet
+  portainer:
+    image: portainer/portainer
+    ports:
+      - "9000:9000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints: [node.role == manager]
+    networks:
+      - webnet     
+networks:
+  webnet:
