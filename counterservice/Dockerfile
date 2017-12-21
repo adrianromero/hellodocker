@@ -1,5 +1,5 @@
 
-FROM openjdk:8
+FROM openjdk:8-alpine
 WORKDIR /usr/src/myapp
 ADD . /usr/src/myapp
 RUN ./gradlew installDist
