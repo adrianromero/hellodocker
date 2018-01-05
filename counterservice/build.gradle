@@ -12,6 +12,7 @@ repositories {
 }
 
 dependencies {
+    compile group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.25'
     compile group: 'com.sparkjava', name: 'spark-core', version: '2.7.1'
     compile group: 'org.postgresql', name: 'postgresql', version: '9.4.1212'
     compile group: 'com.zaxxer', name: 'HikariCP', version: '2.7.4'
