@@ -4,12 +4,13 @@ services:
     image: counterservice
     environment:
       - DB_DRIVER=org.postgresql.Driver
-      - DB_URL=jdbc:postgresql://database:5432/postgres
-      - DB_USERNAME=postgres
+      - DB_URL=jdbc:postgresql://database:5432/myuser
+      - DB_USERNAME=myuser
       - DB_PASSWORD=mysecret
     ports:
       - "4567:4567"
   database:
     image: counterdatabase
     environment:
+      - POSTGRES_USER=myuser
       - POSTGRES_PASSWORD=mysecret
